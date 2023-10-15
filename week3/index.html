@@ -107,4 +107,23 @@
   </div>
 </body>
 <script>
-  // Function to change the im
+  // Function to change the image in the carousel
+  function changeImage() {
+    const images = ["1.png", "2.png", "3.png","4.png","5.png","6.png","7.png","8.png"]; // Add your image filenames
+    const imgElement = document.getElementsByName("slide")[0];
+    let currentIndex = images.indexOf(imgElement.src.split("/").pop());
+
+    // Loop through the images
+    currentIndex = (currentIndex + 1) % images.length;
+
+    // Set the new image source
+    imgElement.src = "images1/" + images[currentIndex];
+
+    // Change image every 3 seconds (adjust as needed)
+    setTimeout(changeImage, 3000);
+  }
+
+  // Call the function when the page loads
+  window.onload = changeImage;
+</script>
+</html>
