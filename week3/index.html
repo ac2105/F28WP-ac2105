@@ -31,6 +31,7 @@
     <!-- Replacing Banner Section with new slider -->
     <section class="banner-container">
       <img name="slide" alt="Image carousel" title="images" width="70%"/>
+      <a href="#" class="next" onclick="changeSlide(1)">&#10095;</a>
     </section>
 
 
@@ -105,25 +106,64 @@
       <p>&copy; 2024 Wanderlust Voyages | Travel Agency. All rights reserved.</p>
     </footer>
   </div>
+  <!-- Navigation for Slideshow -->
+  <a href="#" class="prev" onclick="changeSlide(-1)">❮ Previous</a>
+  <a href="#" class="next" onclick="changeSlide(1)">Next ❯</a>
+
 </body>
 <script>
+  let currentSlide = 0;
+  let isAutoChangeEnabled = true; // Variable to control automatic slide change
+
   // Function to change the image in the carousel
   function changeImage() {
-    const images = ["1.png", "2.png", "3.png","4.png","5.png","6.png","7.png","8.png"]; // Add your image filenames
-    const imgElement = document.getElementsByName("slide")[0];
-    let currentIndex = images.indexOf(imgElement.src.split("/").pop());
+    if (isAutoChangeEnabled) {
+      const images = ["1.png", "2.png", "3.png","4.png","5.png","6.png","7.png","8.png"];
+      const imgElement = document.getElementsByName("slide")[0];
+      let currentIndex = images.indexOf(imgElement.src.split("/").pop());
 
-    // Loop through the images
-    currentIndex = (currentIndex + 1) % images.length;
+      // Loop through the images
+      currentIndex = (currentIndex + 1) % images.length;
 
-    // Set the new image source
-    imgElement.src = "images1/" + images[currentIndex];
+      // Set the new image source
+      imgElement.src = "images1/" + images[currentIndex];
+    }
 
     // Change image every 3 seconds (adjust as needed)
     setTimeout(changeImage, 3000);
   }
 
+  // Function to change the slide
+  function changeSlide(n) {
+    isAutoChangeEnabled = false; // Disable automatic slide change when manual change happens
+    showSlide(currentSlide += n);
+  }
+
+  // Function to update the slide's visibility
+  function showSlide(n) {
+    const images = ["1.png", "2.png", "3.png","4.png","5.png","6.png","7.png","8.png"];
+    const imgElement = document.getElementsByName("slide")[0];
+
+    // Ensure the current slide is within bounds
+    if (n >= images.length) {
+      currentSlide = 0;
+    } else if (n < 0) {
+      currentSlide = images.length - 1;
+    } else {
+      currentSlide = n;
+    }
+
+    // Set the new image source
+    imgElement.src = "images1/" + images[currentSlide];
+  }
+
   // Call the function when the page loads
-  window.onload = changeImage;
+  window.onload = function() {
+    changeImage(); // Original image carousel function
+    showSlide(currentSlide); // Show the initial slide
+  };
 </script>
+
+
+
 </html>
