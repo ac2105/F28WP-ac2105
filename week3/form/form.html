@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>User Registration Form</title>
+</head>
+<body>
+
+<div id="form">
+  <h1>User Registration</h1>
+
+  <form id="registrationForm" onsubmit="return validateForm()">
+    <div class="input-control">
+      <label for="username">Username:</label>
+      <input type="text" id="username" onblur="validateUsername()">
+      <div class="error" id="usernameError"></div>
+    </div>
+
+    <div class="input-control">
+      <label for="email">Email:</label>
+      <input type="email" id="email" onblur="validateEmail()">
+      <div class="error" id="emailError"></div>
+    </div>
+
+    <div class="input-control">
+      <label for="password">Password:</label>
+      <input type="password" id="password" onblur="validatePassword()">
+      <div class="error" id="passwordError"></div>
+    </div>
+
+    <div class="input-control">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" onblur="validateConfirmPassword()">
+      <div class="error" id="confirmPasswordError"></div>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+  function validateUsername() {
+    const usernameInput = document.getElementById('username');
+    const usernameError = document.getElementById('usernameError');
+
+    if (usernameInput.value.trim() === '') {
+      setErrorMessage(usernameError, 'Username cannot be empty');
+      markInputAsError(usernameInput);
+    } else {
+      clearErrorMessage(usernameError);
+      markInputAsSuccess(usernameInput);
+    }
+  }
+
+  function validateEmail() {
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailInput.value.trim() === '') {
+      setErrorMessage(emailError, 'Email cannot be empty');
+      markInputAsError(emailInput);
+    } else if (!emailRegex.test(emailInput.value.trim())) {
+      setErrorMessage(emailError, 'Invalid email format');
+      markInputAsError(emailInput);
+    } else {
+      clearErrorMessage(emailError);
+      markInputAsSuccess(emailInput);
+    }
+  }
+
+  function validatePassword() {
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+
+    if (passwordInput.value.trim() === '') {
+      setErrorMessage(passwordError, 'Password cannot be empty');
+      markInputAsError(passwordInput);
+    } else if (passwordInput.value.trim().length < 8) {
+      setErrorMessage(passwordError, 'Password must be at least 8 characters');
+      markInputAsError(passwordInput);
+    } else {
+      clearErrorMessage(passwordError);
+      markInputAsSuccess(passwordInput);
+    }
+  }
+
+  function validateConfirmPassword() {
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+    const passwordInput = document.getElementById('password');
+
+    if (confirmPasswordInput.value.trim() === '') {
+      setErrorMessage(confirmPasswordError, 'Confirm Password cannot be empty');
+      markInputAsError(confirmPasswordInput);
+    } else if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
+      setErrorMessage(confirmPasswordError, 'Passwords do not match');
+      markInputAsError(confirmPasswordInput);
+    } else {
+      clearErrorMessage(confirmPasswordError);
+      markInputAsSuccess(confirmPasswordInput);
+    }
+  }
+
+  function setErrorMessage(element, message) {
+    element.textContent = message;
+  }
+
+  function clearErrorMessage(element) {
+    element.textContent = '';
+  }
+
+  function markInputAsSuccess(input) {
+    input.classList.remove('error');
+    input.classList.add('success');
+  }
+
+  function markInputAsError(input) {
+    input.classList.remove('success');
+    input.classList.add('error');
+  }
+
+  function validateForm() {
+    validateUsername();
+    validateEmail();
+    validatePassword();
+    validateConfirmPassword();
+
+    // Check if there are any error messages
+    const errorMessages = document.querySelectorAll('.error');
+    if (errorMessages.length > 0) {
+      return false; // Prevent form submission
+    }
+
+    // Form is valid, allow submission
+    return true;
+  }
+</script>
+
+</body>
+</html>
+
