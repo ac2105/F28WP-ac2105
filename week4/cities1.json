@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Dubai",
+        "country": "United Arab Emirates",
+        "places": {
+            "indoor": ["Dubai Mall", "IMG world"],
+            "outdoor": ["JBR Beach", "Zabeel Park"]
+        }
+    },
+    
+    {
+        "name": "Milan",
+        "country": "Italy",
+        "places": {
+            "indoor": ["Duomo di Milano", "Galleria Vittorio"],
+            "outdoor": ["Piazza del Duomo", "Parco Sempione"]
+        }
+    },
+
+    {
+        "name": "Cape Town",
+        "country": "South Africa",
+        "places": {
+            "indoor": ["CAPE TOWN DIAMOND MUSEUM", "The Planetarium"],
+            "outdoor": ["V&A WATERFRONT", "BUTTERFLY WORLD"]
+        }
+    }
+]
