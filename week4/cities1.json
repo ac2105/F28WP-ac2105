@@ -21,8 +21,8 @@
         "name": "Cape Town",
         "country": "South Africa",
         "places": {
-            "indoor": ["CAPE TOWN DIAMOND MUSEUM", "The Planetarium"],
-            "outdoor": ["V&A WATERFRONT", "BUTTERFLY WORLD"]
+            "indoor": ["Cape Town Diamond Museum", "The Planetarium"],
+            "outdoor": ["V&A Waterfront", "Butterfly World"]
         }
     }
 ]
